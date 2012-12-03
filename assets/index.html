@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/styles.css" />
+    </head>
+    <body>
+        <div id="menu">
+            <div class="not-logged-in">
+                <button data-action="login">Login to play</button>
+            </div>
+
+            <div class="logged-in">
+                <button data-action="deposit">Deposit</button>
+                <button data-action="withdraw">Withdraw</button>
+            </div>
+        </div>
+
+        <div id="chat">
+            <textarea class="messages">Welcome to play.luckco.in! 1 BTC = 1000 CREDIT
+No credits? Don't worry. You can win free credits every 10 min in the chat</textarea>
+            <input type="text" class="message" />
+            <button class="send">Chat</a>
+        </div>
+
+        <div id="container">
+            <div id="machine">
+            </div>
+        </div>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/scripts.js"></script>
+    </body>
+</html>

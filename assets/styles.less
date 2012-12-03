@@ -1,0 +1,118 @@
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+  overflow: hidden;
+}
+
+#machine {
+    position: relative;
+    background-color: @blue;
+    color: @yellow;
+    height: 800px;
+    width: 600px;
+}
+
+#chat {
+  .messages {
+    width: 400px;
+    display: block;
+    font-family: Arial;
+    font-size: 9px;
+    height: 100px;
+  }
+
+  .message {
+    width: 350px;
+  }
+}
+
+@yellow: #FFFF50;
+@blue: #00009E;
+@white: #FFFFFF;
+@red: #900000;
+
+.card {
+    position: absolute;
+}
+
+.hold {
+    position: absolute;
+    &:after { content: "held" }
+    color: @white;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.deal, .betOne, .betMax {
+  position: absolute;
+  font-family: Arial;
+  background-color: @yellow;
+  border-stype: solid;
+  border-color: @white;
+  color: @blue;
+  text-transform: uppercase;
+}
+
+.deal {
+    &:after { content: "deal" }
+}
+
+.betOne {
+    &:after { content: "bet one" }
+}
+
+.betMax {
+    &:after { content: "bet max" }
+}
+
+.balance {
+  text-transform: uppercase;
+  position: absolute;
+  font-family: Arial;
+  &:before { content: "credits "}
+}
+
+.bet {
+  text-transform: uppercase;
+  position: absolute;
+  font-family: Arial;
+  &:before { content: "bet "}
+}
+
+.paytable {
+  text-transform: uppercase;
+  border-collapse: collapse;
+  position: absolute;
+  font-weight: bold;
+  border-color: #2A4480;
+  font-family: Arial;
+  border-style: solid;
+
+  tr {
+    td {
+      &.highlight {
+        background-color: @red;
+      }
+    }
+
+    td:first-child {
+        &.highlight {
+            color: #FFFFFF;
+        }
+
+        background-color: transparent;
+        color: yellow;
+        padding-left: 25%;
+        width: 55%;
+    }
+
+    td:eq(1) {
+    }
+  }
+}
+
+.not-logged-in, .logged-in {
+  display: none;
+}
