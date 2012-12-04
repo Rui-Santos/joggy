@@ -3,10 +3,63 @@ html, body {
   height: 100%;
   margin: 0px;
   overflow: hidden;
+  background: url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/az_subtle.png);
 }
 
-#machine {
-    position: relative;
+/*.thoughtbot {
+  background-color: #ee432e;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee432e), color-stop(50%, #c63929), color-stop(50%, #b51700), color-stop(100%, #891100));
+  background-image: -webkit-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+  background-image: -moz-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+  background-image: -ms-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+  background-image: -o-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+  background-image: linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+  border: 1px solid #951100;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4), 0 1px 3px #333333;
+  box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4), 0 1px 3px #333333;
+  color: #fff;
+  font: bold 20px/1 "helvetica neue", helvetica, arial, sans-serif;
+  padding: 12px 0 14px 0;
+  text-align: center;
+  text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+  width: 150px;
+
+  &:hover {
+      background-color: #f37873;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f37873), color-stop(50%, #db504d), color-stop(50%, #cb0500), color-stop(100%, #a20601));
+      background-image: -webkit-linear-gradient(top, #f37873 0%, #db504d 50%, #cb0500 50%, #a20601 100%);
+      background-image: -moz-linear-gradient(top, #f37873 0%, #db504d 50%, #cb0500 50%, #a20601 100%);
+      background-image: -ms-linear-gradient(top, #f37873 0%, #db504d 50%, #cb0500 50%, #a20601 100%);
+      background-image: -o-linear-gradient(top, #f37873 0%, #db504d 50%, #cb0500 50%, #a20601 100%);
+      background-image: linear-gradient(top, #f37873 0%, #db504d 50%, #cb0500 50%, #a20601 100%);
+      cursor: pointer;
+  }
+
+  &:active {
+    background-color: #d43c28;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d43c28), color-stop(50%, #ad3224), color-stop(50%, #9c1500), color-stop(100%, #700d00));
+    background-image: -webkit-linear-gradient(top, #d43c28 0%, #ad3224 50%, #9c1500 50%, #700d00 100%);
+    background-image: -moz-linear-gradient(top, #d43c28 0%, #ad3224 50%, #9c1500 50%, #700d00 100%);
+    background-image: -ms-linear-gradient(top, #d43c28 0%, #ad3224 50%, #9c1500 50%, #700d00 100%);
+    background-image: -o-linear-gradient(top, #d43c28 0%, #ad3224 50%, #9c1500 50%, #700d00 100%);
+    background-image: linear-gradient(top, #d43c28 0%, #ad3224 50%, #9c1500 50%, #700d00 100%);
+    -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4);
+    box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4);
+  }
+}*/
+
+/*#top-bar {
+  width: 100%;
+  background-color: #eee;
+
+  button {
+    //.thoughtbot;
+  }
+}*/
+
+.machine {
+    position: absolute;
     background-color: @blue;
     color: @yellow;
     height: 800px;
@@ -14,16 +67,20 @@ html, body {
 }
 
 #chat {
+  position: absolute;
+
+  //background-color: yellow;
+  background: url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/grey.png);
+
   .messages {
-    width: 400px;
     display: block;
     font-family: Arial;
-    font-size: 9px;
-    height: 100px;
+    font-size: 16px;
+    list-style-type: none;
   }
 
   .message {
-    width: 350px;
+    width: 70%;
   }
 }
 
@@ -53,6 +110,7 @@ html, body {
   border-color: @white;
   color: @blue;
   text-transform: uppercase;
+  cursor: default;
 }
 
 .deal {
@@ -115,4 +173,13 @@ html, body {
 
 .not-logged-in, .logged-in {
   display: none;
+}
+
+.welcome {
+  position: absolute;
+
+  .message {
+    background-color: white;
+    padding: 50px 50px 50px 50px;
+  }
 }
