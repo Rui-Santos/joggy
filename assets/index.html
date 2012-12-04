@@ -5,32 +5,25 @@
         <link rel="stylesheet" href="/styles.css" />
     </head>
     <body>
-        <div id="menu">
-            <div class="not-logged-in">
-                <button data-action="login">Login to play</button>
-            </div>
-
-            <div class="logged-in">
-                <button data-action="deposit">Deposit</button>
-                <button data-action="withdraw">Withdraw</button>
-            </div>
-
-            <button data-action="help">Help</button>
+        <div class="navbar" id="top-bar">
+          <div class="navbar-inner">
+            <ul class="nav">
+              <li><a href="#" data-action="login">Login</a></li>
+              <li><a href="#" data-action="deposit">Deposit</a></li>
+              <li><a href="#" data-action="withdraw">Withdraw</a></li>
+              <li><a href="#" data-action="help">Help</a></li>
+            </ul>
+          </div>
         </div>
 
         <div id="chat">
-            <textarea class="messages">Welcome to play.luckco.in! 1 BTC = 1000 CREDIT
-No credits? Don't worry. You can win free credits every 10 min in the chat</textarea>
-            <input type="text" class="message" />
-            <button class="send">Chat</button>
+            <div class="messages"></div>
+            <input class="input message" placeholder="Type here..." type="text" />
+            <button class="btn send">Chat</button>
         </div>
 
-        <div id="container">
-            <div id="machine">
-            </div>
+        <div id="primary-container">
         </div>
-
-        <iframe src="http://bitcoinadvertisers.com/a.php?p=17FZqqn7EiuQif2w3TdG6njYDCuyBQ3rBC&a=4&bg=FFFFFF&link=3366FF&text=414141" scrolling="no" style="width:468px;height:60px;border:1px solid #f2f2f2;"></iframe>
 
         <script src="/socket.io/socket.io.js"></script>
         <script src="/scripts.js"></script>
