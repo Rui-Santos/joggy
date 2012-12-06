@@ -19,6 +19,7 @@
         "qs": "0.5.2",
         "crypto-browserify": "0.1.1",
         "oauth": "0.9.8",
+        "sanitizer": "0.0.15",
         "q": "0.8.11",
         "bitcoin": "1.5.0"
     },
