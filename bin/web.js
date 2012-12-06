@@ -15,7 +15,7 @@ process.on('uncaughtException', function(err) {
 services.config = require('../config')
 services.db = monk(services.config.db)
 services.sync = require('../lib/server/app.db.sync')
-services.bitcoin = new (require('../lib/server/controllers/bitcoin'))()
+services.bitcoin = new (require('../lib/server/controllers/Bitcoin'))()
 
 services.site = new Site()
 
