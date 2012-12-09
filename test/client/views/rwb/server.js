@@ -1,0 +1,59 @@
+var express = require('express')
+, browserify = require('browserify')
+, http = require('http')
+, app = express()
+, fs = require('fs')
+, _ = require('underscore')
+, path = require('path')
+, async = require('async')
+, assets = require('sassets')
+, server = http.createServer(app)
+
+server.listen(4091)
+
+var script, scripts = [
+    { path: 'assets/vendor/jquery-1.8.2.js' },
+    { path: 'assets/vendor/alertify.min.js' },
+    { path: 'assets/vendor/bootstrap.min.js' },
+    { type: 'browserify', path: 'test/client/views/rwb/entry.js' }
+]
+
+async.map(scripts, assets.load, function(err, srcs) {
+    if (err) throw err
+    script = _.reduce(srcs, function(a, b) { return a + b })
+})
+
+app.get('/scripts.js', function(req, res, next) {
+    res.contentType('text/javascript')
+    res.end(script)
+})
+
+var style
+
+var styles = [
+    { path: 'assets/vendor/bootstrap.min.css' },
+    { path: 'assets/vendor/bootstrap-responsive.min.css' },
+    { path: 'assets/styles.less' },
+    { path: 'assets/vendor/alertify.core.css' },
+    { path: 'assets/vendor/alertify.default.css' }
+]
+
+async.map(styles, assets.load, function(err, styles) {
+    if (err) throw err
+    style = _.reduce(styles, function(a, b) { return a + b })
+})
+
+app.get('/styles.css', function(req, res, next) {
+    res.contentType('text/css')
+    res.end(style)
+})
+
+app.get(/\/($|\?)/, function(req, res, next) {
+    res.contentType('text/html');
+    fs.readFile(path.join(__dirname, 'index.html'), 'utf8', function(err, r) {
+        if (err) return next(err);
+        res.end(r);
+    });
+});
+
+app.use('/media', express.static(path.join(__dirname, '../../../../assets/media'), { maxAge: 1000 * 60 * 60 * 24 }));
