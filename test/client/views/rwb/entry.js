@@ -17,6 +17,6 @@ var RwbMachineView = require('../../../../lib/client/views/RwbMachineView')
     model: model
 })
 
-machine.rect(0, 0, 500, 500)
+machine.rect(0, 0, 600, 400)
 
 $('#container').append(machine.$el)

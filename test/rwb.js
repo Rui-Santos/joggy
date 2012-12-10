@@ -305,9 +305,9 @@ describe('rwb', function() {
 
     describe('nicePayouts', function() {
         var expectedReturns = [
-            0.995, // 1
-            0.995, // 2
-            0.995 // 3
+            0.98, // 1
+            0.98, // 2
+            0.98 // 3
         ]
 
         for (var c = 1; c <= 3; c++) {
