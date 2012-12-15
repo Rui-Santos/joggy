@@ -304,36 +304,36 @@ describe('rwb', function() {
     })
 
     describe('nicePayouts', function() {
-        var expectedReturns = [
-            0.98, // 1
-            0.98, // 2
-            0.98 // 3
-        ]
+        it('pays around 98 percent', function() {
+            var expectedReturns = [
+                0.98, // 1
+                0.98, // 2
+                0.98 // 3
+            ]
 
-        for (var c = 1; c <= 3; c++) {
-            var returned = 0
+            for (var c = 1; c <= 3; c++) {
+                var returned = 0
 
-            for (var r1 = 0; r1 < rwb.lookups[0].length; r1++) {
-                for (var r2 = 0; r2 < rwb.lookups[1].length; r2++) {
-                    for (var r3 = 0; r3 < rwb.lookups[2].length; r3++) {
-                        var line = [
-                            rwb.lookup(0, r1),
-                            rwb.lookup(1, r2),
-                            rwb.lookup(2, r3)
-                        ]
+                for (var r1 = 0; r1 < rwb.lookups[0].length; r1++) {
+                    for (var r2 = 0; r2 < rwb.lookups[1].length; r2++) {
+                        for (var r3 = 0; r3 < rwb.lookups[2].length; r3++) {
+                            var line = [
+                                rwb.lookup(0, r1),
+                                rwb.lookup(1, r2),
+                                rwb.lookup(2, r3)
+                            ]
 
-                        returned += rwb.payout(line, c, 'nice')
+                            returned += rwb.payout(line, c, 'nice')
+                        }
                     }
                 }
-            }
 
-            var returnedAvg = returned / 64 / 64 / 64
-            , returnedPerCoin = returnedAvg / c
-            console.log('returned per coin for ' + c + ' is ' + returnedPerCoin)
-            , delta = Math.abs(expectedReturns[c - 1] - returnedPerCoin)
-            console.log(expectedReturns[c - 1] - returnedPerCoin)
-            expect(delta).to.be.lessThan(0.0005)
-        }
+                var returnedAvg = returned / 64 / 64 / 64
+                , returnedPerCoin = returnedAvg / c
+                var delta = Math.abs(expectedReturns[c - 1] - returnedPerCoin)
+                expect(delta).to.be.lessThan(0.005)
+            }
+        })
     })
 
     describe('classicPayouts', function() {
