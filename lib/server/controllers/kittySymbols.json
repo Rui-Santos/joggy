@@ -1,0 +1,177 @@
+[
+    {
+        "x": 50,
+        "y": 0,
+        "width": 50,
+        "height": 50,
+        "filename": "alfred-nobel.png"
+    },
+    {
+        "x": 0,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "apple.png"
+    },
+    {
+        "x": 0,
+        "y": 50,
+        "width": 50,
+        "height": 50,
+        "filename": "banana.png"
+    },
+    {
+        "x": 50,
+        "y": 50,
+        "width": 50,
+        "height": 50,
+        "filename": "bill-clinton.png"
+    },
+    {
+        "x": 100,
+        "y": 0,
+        "width": 50,
+        "height": 50,
+        "filename": "bitcoin.png"
+    },
+    {
+        "x": 100,
+        "y": 50,
+        "width": 50,
+        "height": 50,
+        "filename": "car.png"
+    },
+    {
+        "x": 0,
+        "y": 100,
+        "width": 50,
+        "height": 50,
+        "filename": "chicken.png"
+    },
+    {
+        "x": 50,
+        "y": 100,
+        "width": 50,
+        "height": 50,
+        "filename": "cup.png"
+    },
+    {
+        "x": 100,
+        "y": 100,
+        "width": 50,
+        "height": 50,
+        "filename": "einstein.png"
+    },
+    {
+        "x": 150,
+        "y": 0,
+        "width": 50,
+        "height": 50,
+        "filename": "flower.png"
+    },
+    {
+        "x": 150,
+        "y": 50,
+        "width": 50,
+        "height": 50,
+        "filename": "hamurger.png"
+    },
+    {
+        "x": 150,
+        "y": 100,
+        "width": 50,
+        "height": 50,
+        "filename": "helicopter.png"
+    },
+    {
+        "x": 0,
+        "y": 0,
+        "width": 50,
+        "height": 50,
+        "filename": "henry-ford.png"
+    },
+    {
+        "x": 50,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "homer.png"
+    },
+    {
+        "x": 100,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "kitten.png"
+    },
+    {
+        "x": 150,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "marie-curie.png"
+    },
+    {
+        "x": 200,
+        "y": 0,
+        "width": 50,
+        "height": 50,
+        "filename": "motorcycle.png"
+    },
+    {
+        "x": 200,
+        "y": 50,
+        "width": 50,
+        "height": 50,
+        "filename": "niels.png"
+    },
+    {
+        "x": 200,
+        "y": 100,
+        "width": 50,
+        "height": 50,
+        "filename": "nikola.png"
+    },
+    {
+        "x": 200,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "obama.png"
+    },
+    {
+        "x": 0,
+        "y": 200,
+        "width": 50,
+        "height": 50,
+        "filename": "plane.png"
+    },
+    {
+        "x": 50,
+        "y": 200,
+        "width": 50,
+        "height": 50,
+        "filename": "puppy.png"
+    },
+    {
+        "x": 100,
+        "y": 200,
+        "width": 50,
+        "height": 50,
+        "filename": "santa.png"
+    },
+    {
+        "x": 150,
+        "y": 200,
+        "width": 50,
+        "height": 50,
+        "filename": "stephen-hawking.png"
+    },
+    {
+        "x": 200,
+        "y": 200,
+        "width": 50,
+        "height": 50,
+        "filename": "wallet.png"
+    }
+]
