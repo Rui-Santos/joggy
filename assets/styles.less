@@ -67,64 +67,78 @@ html, body {
 .rwb-machine {
 }
 
-#chat {
-  position: absolute;
+#primary-container {
+  float: left;
+}
 
-  //background-color: yellow;
-  background: url(/media/grey.png);
-
-  .user-count {
-    background-color: #FFFFFF;
-    padding-top: 5px;
-    padding-right: 20px;
-    text-align: right;
-  }
+#right-bar {
+  float: left;
+  width: 300px;
+  height: 100%;
 
   #minigames-container {
   }
 
-  .messages {
-    display: block;
-    font-family: Arial;
-    font-size: 16px;
-    list-style-type: none;
+  #chat {
+    height: 100%;
+    padding-left: 5px;
 
-    > li {
-      padding: 8px 2px 8px 10px;
-      background-color: #99CCFF;
-
-      margin: 5px 10px 5px 0;
-      border-radius: 10px;
-      -webkit-border-radius: 10px;
-
-      white-space: pre-wrap; /* css-3 */
-      white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-      white-space: -pre-wrap; /* Opera 4-6 */
-      white-space: -o-pre-wrap; /* Opera 7 */
-      word-wrap: break-word; /* Internet Explorer 5.5+ */
-      overflow-x: hidden;
-
-      &.system {
-        background-color: #66CCFF;
-      }
-
-      &.sprinkles {
-        background-color: #FF99FF;
-      }
+    .user-count {
+      background-color: #FFFFFF;
+      padding-top: 5px;
+      padding-right: 20px;
+      text-align: right;
     }
 
-    overflow-y: scroll;
-  }
+    background: url(/media/grey.png);
 
-  .message {
-    width: 79%;
-    margin-left: 5%;
-  }
 
-  .send {
-    margin-bottom: 10px;
+    .messages {
+      display: block;
+      margin: 0;
+      font-family: Arial;
+      font-size: 16px;
+      list-style-type: none;
+      padding-right: 5px;
+
+      > li {
+        padding: 8px 2px 8px 10px;
+        background-color: #99CCFF;
+
+        margin: 5px 0 5px 0;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+
+        white-space: pre-wrap; /* css-3 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        word-wrap: break-word; /* Internet Explorer 5.5+ */
+        overflow-x: hidden;
+
+        &.system {
+          background-color: #66CCFF;
+        }
+
+        &.sprinkles {
+          background-color: #FF99FF;
+        }
+      }
+
+      overflow-y: scroll;
+    }
+
+    .message {
+      width: 280px;
+    }
+
+    .send {
+      width: 281px;
+      margin-top: 10px;
+    }
   }
 }
+
 
 @yellow: #FFFF50;
 @blue: #00009E;
@@ -218,13 +232,6 @@ html, body {
 }
 
 .welcome {
-  position: absolute;
-
-  .message {
-    background-color: white;
-    padding: 50px 50px 50px 50px;
-  }
-
   .games {
     list-style-type: none;
 
