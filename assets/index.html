@@ -46,6 +46,43 @@
           </div>
         </div>
 
+        <div class="modal hide fade" id="withdraw-modal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Withdraw funds</h3>
+            </div>
+            <div class="modal-body">
+                <p class="error" style="color:red;"></p>
+
+                <table class="table" style="width:300px;">
+                    <tr>
+                        <td>Balance</td>
+                        <td class="balance"></td>
+                    </tr>
+                    <tr>
+                        <td>Wager requirement</td>
+                        <td class="held"></td>
+                    </tr>
+                    <tr>
+                        <td>Available to withdraw</td>
+                        <td class="available"></td>
+                    </tr>
+                </table>
+
+                <div class="control-group">
+                    <label class="control-label" for="credits">Credits:</label>
+                    <input type="text" class="input-large" id="credits" />
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="address">Address:</label>
+                    <input type="text" class="input-xlarge" id="address" />
+                </div>
+
+                <input type="submit" value="Withdraw" class="btn btn-primary withdraw" />
+            </div>
+        </div>
+
         <script src="/socket.io/socket.io.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
         <script src="/scripts.js"></script>
