@@ -21,7 +21,8 @@
         "oauth": "0.9.8",
         "sanitizer": "0.0.15",
         "q": "0.8.11",
-        "bitcoin": "1.5.0"
+        "bitcoin": "1.5.0",
+        "blockchain": "1.0.5"
     },
     "devDependencies": {
         "mocha": "1.6.x",
