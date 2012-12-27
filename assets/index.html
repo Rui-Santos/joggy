@@ -4,7 +4,21 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="IE=9">
         <link rel="stylesheet" href="/styles.css" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <title>luckco.in</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-37058008-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
     </head>
     <body>
         <div class="navbar" id="top-bar">
@@ -29,8 +43,46 @@
               <div class="user-count"></div>
 
               <ul class="messages"></ul>
-              <input class="input message" maxLength="250" placeholder="Say something nice!" type="text" />
+              <input class="input message" maxLength="250" type="text" />
           </div>
+        </div>
+
+        <div class="modal hide fade" id="withdraw-modal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Withdraw funds</h3>
+            </div>
+            <div class="modal-body">
+                <p class="error" style="color:red;"></p>
+
+                <table class="table" style="width:300px;">
+                    <tr>
+                        <td>Balance</td>
+                        <td class="balance"></td>
+                    </tr>
+                    <tr>
+                        <td>Wager requirement</td>
+                        <td class="held"></td>
+                    </tr>
+                    <tr>
+                        <td>Available to withdraw</td>
+                        <td class="available"></td>
+                    </tr>
+                </table>
+
+                <div class="control-group">
+                    <label class="control-label" for="credits">Credits:</label>
+                    <input type="text" class="input-large" id="credits" />
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="address">Address:</label>
+                    <input type="text" class="input-xlarge" id="address" />
+                </div>
+
+                <input type="submit" value="Withdraw" class="btn btn-primary withdraw" />
+                <button class="btn cancel">Cancel</button>
+            </div>
         </div>
 
         <script src="/socket.io/socket.io.js"></script>
