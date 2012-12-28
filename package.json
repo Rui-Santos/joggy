@@ -1,6 +1,9 @@
 {
     "name": "joggy",
     "version": "0.0.0",
+    "scripts": {
+        "test": "mocha"
+    },
     "dependencies": {
         "browserify": "1.16.6",
         "socket.io": "0.9.11",

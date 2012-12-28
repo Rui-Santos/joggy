@@ -61,13 +61,13 @@ describe('vp-job', function() {
         });
     });
 
-    describe('payout 9/6', function() {
+    describe('payout 9-6', function() {
         it('conforms to rules', function() {
-            expect(vpjob.payout('as ks qs js ts', '9/6', 5)).to.be(4000);
-            expect(vpjob.payout('7c 7d kh qh jh', '9/6', 2)).to.be(0);
-            expect(vpjob.payout('7c 7d 7h qh jh', '9/6', 4)).to.be(12);
-            expect(vpjob.payout('9h 7h 8h 2h qh', '9/6', 5)).to.be(30);
-            expect(vpjob.payout('ah kh qh jh th', '9/6', 1)).to.be(250);
+            expect(vpjob.payout('as ks qs js ts', '9-6', 5)).to.be(4000);
+            expect(vpjob.payout('7c 7d kh qh jh', '9-6', 2)).to.be(0);
+            expect(vpjob.payout('7c 7d 7h qh jh', '9-6', 4)).to.be(12);
+            expect(vpjob.payout('9h 7h 8h 2h qh', '9-6', 5)).to.be(30);
+            expect(vpjob.payout('ah kh qh jh th', '9-6', 1)).to.be(800);
         });
     });
 
@@ -76,16 +76,16 @@ describe('vp-job', function() {
             expect(vpjob.payout).to.be.ok();
         });
 
-        it('is correct for 9/6', function() {
-            var pay = vpjob.payouts['9/6'];
+        it('is correct for 9-6', function() {
+            var pay = vpjob.payouts['9-6'];
             expect(pay).to.be.an('object');
             expect(pay[1]).to.be.an('array');
 
             // http://en.wikipedia.org/wiki/Video_poker#Jacks_or_Better
-            expect(pay[1]).to.eql([1, 2, 3, 4, 6, 9, 25, 50, 250]);
-            expect(pay[2]).to.eql([2, 4, 6, 8, 12, 18, 50, 100, 500]);
-            expect(pay[3]).to.eql([3, 6, 9, 12, 18, 27, 75, 150, 750]);
-            expect(pay[4]).to.eql([4, 8, 12, 16, 24, 36, 100, 200, 1000]);
+            expect(pay[1]).to.eql([1, 2, 3, 4, 6, 9, 25, 50, 800]);
+            expect(pay[2]).to.eql([2, 4, 6, 8, 12, 18, 50, 100, 1600]);
+            expect(pay[3]).to.eql([3, 6, 9, 12, 18, 27, 75, 150, 2400]);
+            expect(pay[4]).to.eql([4, 8, 12, 16, 24, 36, 100, 200, 3200]);
             expect(pay[5]).to.eql([5, 10, 15, 20, 30, 45, 125, 250, 4000]);
         });
     });
