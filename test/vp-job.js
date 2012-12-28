@@ -61,13 +61,13 @@ describe('vp-job', function() {
         });
     });
 
-    describe('payout 9/6', function() {
+    describe('payout 9-6', function() {
         it('conforms to rules', function() {
-            expect(vpjob.payout('as ks qs js ts', '9/6', 5)).to.be(4000);
-            expect(vpjob.payout('7c 7d kh qh jh', '9/6', 2)).to.be(0);
-            expect(vpjob.payout('7c 7d 7h qh jh', '9/6', 4)).to.be(12);
-            expect(vpjob.payout('9h 7h 8h 2h qh', '9/6', 5)).to.be(30);
-            expect(vpjob.payout('ah kh qh jh th', '9/6', 1)).to.be(250);
+            expect(vpjob.payout('as ks qs js ts', '9-6', 5)).to.be(4000);
+            expect(vpjob.payout('7c 7d kh qh jh', '9-6', 2)).to.be(0);
+            expect(vpjob.payout('7c 7d 7h qh jh', '9-6', 4)).to.be(12);
+            expect(vpjob.payout('9h 7h 8h 2h qh', '9-6', 5)).to.be(30);
+            expect(vpjob.payout('ah kh qh jh th', '9-6', 1)).to.be(250);
         });
     });
 
@@ -76,8 +76,8 @@ describe('vp-job', function() {
             expect(vpjob.payout).to.be.ok();
         });
 
-        it('is correct for 9/6', function() {
-            var pay = vpjob.payouts['9/6'];
+        it('is correct for 9-6', function() {
+            var pay = vpjob.payouts['9-6'];
             expect(pay).to.be.an('object');
             expect(pay[1]).to.be.an('array');
 
