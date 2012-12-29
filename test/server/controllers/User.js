@@ -1,59 +1,73 @@
 var expect = require('expect.js')
 , User = require('../../../lib/server/controllers/User')
 , Backbone = require('backbone')
-, services = require('../../../lib/server/services')
 
 describe('User', function() {
-    describe('wager', function(done) {
-        it('fails if balance is lower than wager', function(done) {
-            var m = new Backbone.Model({
-                balance: 10e5
+    describe('wager', function() {
+        it('fails when user balance is too low', function(done) {
+            var model = new Backbone.Model({
+                balance: 5e8
             })
-            , mockDb = {
-                get: function() {
-                    return {
-                        update: function() { arguments[arguments.length - 1](null, 1) }
-                    }
-                }
-            }
-            , realDb = services.db
-            , u = new User(m)
-            realDb = services.db
-            services.db = mockDb
 
-            u.wager(11e5, function(err) {
+            var u = new User(model)
+
+            u.wager(6e8, 'test', function(err) {
                 expect(err).to.be.ok()
-                expect(err.code).to.eql('ENOFUNDS')
                 done()
             })
-
-            services.db = realDb
         })
 
-        it('succeeds if balance is gte to wager', function(done) {
-            var m = new Backbone.Model({
-                balance: 11e5
+        it('succeeds when user balance is equal', function(done) {
+            var Model = Backbone.Model.extend({
+                idAttribute: '_id'
             })
-            , mockDb = {
-                get: function() {
-                    return {
-                        update: function() { arguments[arguments.length - 1](null, 1) }
+
+            var model = new Model({
+                _id: 'bob',
+                wagered: 0,
+                balance: 5e8,
+            }, {
+                idAttribute: '_id'
+            })
+            , services = require('../../../lib/server/services')
+
+            services.db = {
+                get: function(name) {
+                    if (name === 'users') {
+                        return {
+                            update: function(q, u, cb) {
+                                expect(q).to.eql({ _id: 'bob' })
+                                expect(u).to.eql({
+                                    $set: {
+                                        balance: 0,
+                                        wagered: 5e8
+                                    }
+                                })
+
+                                cb(null, 1)
+                            }
+                        }
+                    } else if (name === 'users.log') {
+                        console.log('derp')
+                        return {
+                            insert: function(x, cb) {
+                                cb && cb()
+                            }
+                        }
                     }
                 }
             }
-            , realDb = services.db
-            , u = new User(m)
-            realDb = services.db
-            services.db = mockDb
 
-            u.wager(10e5, function(err) {
+            var u = new User(model)
+
+            u.wager(5e8, 'test', function(err) {
                 expect(err).to.not.be.ok()
 
-                u.wager(1e5, function(err) {
-                    expect(err).to.not.be.ok()
-                    services.db = realDb
-                    done()
-                })
+                expect(model.get('balance')).to.be(0)
+                expect(model.get('wagered')).to.be(5e8)
+
+                services.db = null
+                done()
             })
         })
     })
