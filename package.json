@@ -25,7 +25,8 @@
         "sanitizer": "0.0.15",
         "q": "0.8.11",
         "bitcoin": "1.5.0",
-        "blockchain": "1.0.5"
+        "blockchain": "1.0.5",
+        "semaphore": "1.0.1"
     },
     "devDependencies": {
         "mocha": "1.6.x",
