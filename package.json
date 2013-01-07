@@ -1,8 +1,8 @@
 {
     "name": "joggy",
-    "version": "0.0.0",
+    "version": "0.0.2",
     "scripts": {
-        "test": "mocha"
+        "test": "jake test"
     },
     "dependencies": {
         "browserify": "1.16.6",
@@ -26,7 +26,10 @@
         "q": "0.8.11",
         "bitcoin": "1.5.0",
         "blockchain": "1.0.5",
-        "semaphore": "1.0.1"
+        "semaphore": "1.0.1",
+        "jake": "0.5.8",
+        "shelljs": "0.1.1",
+        "jake-utils": "x"
     },
     "devDependencies": {
         "mocha": "1.6.x",
