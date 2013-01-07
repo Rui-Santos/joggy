@@ -81,7 +81,7 @@ task('sprites-rwb', function() {
     var result = exec('imgpk sprites.png ' + fns.join(' '), { silent: true })
     if (result.code) return fail()
 
-    fs.writeFileSync(path.join(__dirname, 'assets/media/rwb/prites.json'), result.output, 'utf8')
+    fs.writeFileSync(path.join(__dirname, 'assets/media/rwb/sprites.json'), result.output, 'utf8')
 
     popd()
 })
