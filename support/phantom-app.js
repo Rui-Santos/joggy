@@ -11,6 +11,7 @@ module.exports = function() {
     app.get('/scripts.js', function(req, res, next) {
         var srcs = [
             { path: 'assets/vendor/jquery-1.8.2.js' },
+            { path: 'assets/vendor/kinetic-v4.3.0.min.js' },
             { path: 'node_modules/mocha/mocha.js' },
             { type: 'browserify', path: 'test/client/index.js' }
         ]
