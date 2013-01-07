@@ -39,3 +39,9 @@ module.exports = function() {
 
     return app;
 }
+
+if (process.argv[1].match(/phantom-app/)) {
+    var app = module.exports()
+    , server = require('http').createServer(app)
+    server.listen(+process.argv[2])
+}
