@@ -1,0 +1,44 @@
+[
+    {
+        "x": 0,
+        "y": 0,
+        "width": 200,
+        "height": 200,
+        "filename": "seven-red.png"
+    },
+    {
+        "x": 200,
+        "y": 0,
+        "width": 200,
+        "height": 200,
+        "filename": "seven-white.png"
+    },
+    {
+        "x": 0,
+        "y": 200,
+        "width": 200,
+        "height": 200,
+        "filename": "seven-blue.png"
+    },
+    {
+        "x": 200,
+        "y": 200,
+        "width": 200,
+        "height": 200,
+        "filename": "one-bar.png"
+    },
+    {
+        "x": 400,
+        "y": 0,
+        "width": 200,
+        "height": 200,
+        "filename": "two-bar.png"
+    },
+    {
+        "x": 400,
+        "y": 200,
+        "width": 200,
+        "height": 200,
+        "filename": "three-bar.png"
+    }
+]

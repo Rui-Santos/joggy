@@ -66,4 +66,24 @@ task('sprites-cards', function() {
     rm('-rf', 'tmp/cards-smaller')
 })
 
-task('sprites', ['sprites-cards'])
+task('sprites-rwb', function() {
+    var fns = [
+        'seven-red.png',
+        'seven-white.png',
+        'seven-blue.png',
+        'one-bar.png',
+        'two-bar.png',
+        'three-bar.png'
+    ]
+
+    pushd('assets/media/rwb')
+
+    var result = exec('imgpk ../sprites.png ' + fns.join(' '), { silent: true })
+    if (result.code) return fail()
+
+    fs.writeFileSync(path.join(__dirname, 'assets/media/rwb/prites.json'), result.output, 'utf8')
+
+    popd()
+})
+
+task('sprites', ['sprites-cards', 'sprites-rwb'])
