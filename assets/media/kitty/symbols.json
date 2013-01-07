@@ -7,8 +7,8 @@
         "filename": "alfred-nobel.png"
     },
     {
-        "x": 0,
-        "y": 150,
+        "x": 200,
+        "y": 0,
         "width": 50,
         "height": 50,
         "filename": "apple.png"
@@ -53,32 +53,60 @@
         "y": 100,
         "width": 50,
         "height": 50,
-        "filename": "cup.png"
+        "filename": "copernicus.png"
     },
     {
         "x": 100,
         "y": 100,
         "width": 50,
         "height": 50,
-        "filename": "einstein.png"
+        "filename": "cup.png"
     },
     {
         "x": 150,
         "y": 0,
         "width": 50,
         "height": 50,
-        "filename": "flower.png"
+        "filename": "darwin.png"
     },
     {
         "x": 150,
         "y": 50,
         "width": 50,
         "height": 50,
-        "filename": "hamurger.png"
+        "filename": "edison.png"
     },
     {
         "x": 150,
         "y": 100,
+        "width": 50,
+        "height": 50,
+        "filename": "einstein.png"
+    },
+    {
+        "x": 0,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "feynman.jpg"
+    },
+    {
+        "x": 50,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "flower.png"
+    },
+    {
+        "x": 100,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "hamburger.png"
+    },
+    {
+        "x": 150,
+        "y": 150,
         "width": 50,
         "height": 50,
         "filename": "helicopter.png"
@@ -91,85 +119,106 @@
         "filename": "henry-ford.png"
     },
     {
-        "x": 50,
-        "y": 150,
-        "width": 50,
-        "height": 50,
-        "filename": "homer.png"
-    },
-    {
-        "x": 100,
-        "y": 150,
-        "width": 50,
-        "height": 50,
-        "filename": "kitten.png"
-    },
-    {
-        "x": 150,
-        "y": 150,
-        "width": 50,
-        "height": 50,
-        "filename": "marie-curie.png"
-    },
-    {
-        "x": 200,
-        "y": 0,
-        "width": 50,
-        "height": 50,
-        "filename": "motorcycle.png"
-    },
-    {
         "x": 200,
         "y": 50,
         "width": 50,
         "height": 50,
-        "filename": "niels.png"
+        "filename": "homer.png"
     },
     {
         "x": 200,
         "y": 100,
         "width": 50,
         "height": 50,
-        "filename": "nikola.png"
+        "filename": "hubble.png"
     },
     {
         "x": 200,
         "y": 150,
         "width": 50,
         "height": 50,
-        "filename": "obama.png"
+        "filename": "kepler.png"
     },
     {
         "x": 0,
         "y": 200,
         "width": 50,
         "height": 50,
-        "filename": "plane.png"
+        "filename": "kitten.png"
     },
     {
         "x": 50,
         "y": 200,
         "width": 50,
         "height": 50,
-        "filename": "puppy.png"
+        "filename": "marie-curie.png"
     },
     {
         "x": 100,
         "y": 200,
         "width": 50,
         "height": 50,
-        "filename": "santa.png"
+        "filename": "motorcycle.png"
     },
     {
         "x": 150,
         "y": 200,
         "width": 50,
         "height": 50,
-        "filename": "stephen-hawking.png"
+        "filename": "niels.png"
     },
     {
         "x": 200,
         "y": 200,
+        "width": 50,
+        "height": 50,
+        "filename": "nikola.png"
+    },
+    {
+        "x": 250,
+        "y": 0,
+        "width": 50,
+        "height": 50,
+        "filename": "obama.png"
+    },
+    {
+        "x": 250,
+        "y": 50,
+        "width": 50,
+        "height": 50,
+        "filename": "pasteur.png"
+    },
+    {
+        "x": 250,
+        "y": 100,
+        "width": 50,
+        "height": 50,
+        "filename": "plane.png"
+    },
+    {
+        "x": 250,
+        "y": 150,
+        "width": 50,
+        "height": 50,
+        "filename": "puppy.png"
+    },
+    {
+        "x": 250,
+        "y": 200,
+        "width": 50,
+        "height": 50,
+        "filename": "santa.png"
+    },
+    {
+        "x": 0,
+        "y": 250,
+        "width": 50,
+        "height": 50,
+        "filename": "stephen-hawking.png"
+    },
+    {
+        "x": 50,
+        "y": 250,
         "width": 50,
         "height": 50,
         "filename": "wallet.png"
