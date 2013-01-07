@@ -139,6 +139,7 @@ describe('Blackjack', function() {
             model.get('boxes')[0].player = p
 
             table.bet(0, 5e8, function(err) {
+                table.endBettingTimer && clearTimeout(table.endBettingTimer)
                 done(err)
             })
         })
@@ -181,7 +182,7 @@ describe('Blackjack', function() {
             }).to.throwError(/callback/)
         })
 
-        it('shuffles', function() {
+        it('shuffles', function(done) {
             var model = new BlackjackModel({ _id: 'test' })
             , table = new Blackjack(model, { callback: function() { } })
             , user = { }
@@ -198,11 +199,13 @@ describe('Blackjack', function() {
             }
 
             table.deal(function(err) {
+                table.turnTimer && clearTimeout(table.turnTimer)
                 expect(model.attributes.deck).to.eql(deck)
+                done(err)
             })
         })
 
-        it('deals to dealer first', function() {
+        it('deals to dealer first', function(done) {
             var model = new BlackjackModel({ _id: 'test' })
             , table = new Blackjack(model, { callback: function() { } })
             , user = { }
@@ -219,12 +222,14 @@ describe('Blackjack', function() {
             }
 
             table.deal(function(err) {
+                table.turnTimer && clearTimeout(table.turnTimer)
                 expect(model.attributes.dealer).to.eql([1, 2])
                 cards.shuffle = orig
+                done(err)
             })
         })
 
-        it('deals to boxes in order', function() {
+        it('deals to boxes in order', function(done) {
             var model = new BlackjackModel({ _id: 'test' })
             , table = new Blackjack(model, { callback: function() { } })
 
@@ -245,9 +250,11 @@ describe('Blackjack', function() {
             }
 
             table.deal(function(err) {
+                table.turnTimer && clearTimeout(table.turnTimer)
                 expect(model.attributes.boxes[0].hands[0].cards).to.eql([3, 4])
                 expect(model.attributes.boxes[1].hands[0].cards).to.eql([5, 6])
                 cards.shuffle = orig
+                done(err)
             })
         })
     })

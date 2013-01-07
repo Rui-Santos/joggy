@@ -48,7 +48,6 @@ describe('User', function() {
                             }
                         }
                     } else if (name === 'users.log') {
-                        console.log('derp')
                         return {
                             insert: function(x, cb) {
                                 cb && cb()
