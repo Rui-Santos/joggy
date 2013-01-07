@@ -30,7 +30,9 @@ task('test-browser', function() {
     })
 })
 
-task('sprites', function() {
+task('test', ['test-node', 'test-browser'])
+
+task('sprites-cards', function() {
     mkdir('-p', 'tmp/cards-smaller')
 
     // reduce scale
@@ -52,12 +54,16 @@ task('sprites', function() {
         fns.push(name + '.png')
     })
 
-    cd('tmp/cards-smaller')
+    pushd('tmp/cards-smaller')
 
     var result = exec('imgpk ../../assets/media/cards.png ' + fns.join(' '), { silent: true })
     if (result.code) return fail()
 
     fs.writeFileSync(path.join(__dirname, 'assets/card-sprites.json'), result.output, 'utf8')
+
+    pushd()
+
+    rm('-rf', 'tmp/cards-smaller')
 })
 
-task('test', ['test-node', 'test-browser'])
+task('sprites', ['sprites-cards'])
