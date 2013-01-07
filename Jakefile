@@ -61,7 +61,7 @@ task('sprites-cards', function() {
 
     fs.writeFileSync(path.join(__dirname, 'assets/card-sprites.json'), result.output, 'utf8')
 
-    pushd()
+    popd()
 
     rm('-rf', 'tmp/cards-smaller')
 })
