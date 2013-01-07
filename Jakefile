@@ -86,7 +86,22 @@ task('sprites-rwb', function() {
     popd()
 })
 
-task('sprites', ['sprites-cards', 'sprites-rwb'])
+task('sprites-kitty', function() {
+    pushd('assets/media/kitty')
+
+    var fns = ls().filter(function(fn) {
+        return !fn.match(/^symbols\./)
+    })
+
+    var result = exec('imgpk symbols.png ' + fns.join(' '), { silent: true })
+    if (result.code) return fail()
+
+    fs.writeFileSync('symbols.json', result.output, 'utf8')
+
+    popd()
+})
+
+task('sprites', ['sprites-cards', 'sprites-rwb', 'sprites-kitty'])
 
 task('publish', ['sprites', 'test'], function() {
     jake.exec([
