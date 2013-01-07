@@ -1,1 +1,2 @@
 require('./Card')
+require('./Cards')
