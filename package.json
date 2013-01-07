@@ -29,7 +29,7 @@
         "semaphore": "1.0.1",
         "jake": "0.5.8",
         "shelljs": "0.1.1",
-        "jake-utils": "x"
+        "canvas": "0.13.1"
     },
     "devDependencies": {
         "mocha": "1.6.x",
