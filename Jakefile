@@ -87,3 +87,12 @@ task('sprites-rwb', function() {
 })
 
 task('sprites', ['sprites-cards', 'sprites-rwb'])
+
+task('publish', ['sprites', 'test'], function() {
+    jake.exec([
+        'git checkout prod',
+        'git merge master',
+        'git checkout master',
+        'git push prod prod:master'
+    ])
+})

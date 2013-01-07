@@ -26,15 +26,15 @@
         "q": "0.8.11",
         "bitcoin": "1.5.0",
         "blockchain": "1.0.5",
-        "semaphore": "1.0.1",
-        "jake": "0.5.8",
-        "shelljs": "0.1.1",
-        "canvas": "0.13.1"
+        "semaphore": "1.0.1"
     },
     "devDependencies": {
         "mocha": "1.6.x",
         "expect.js": "0.2.x",
-        "mocha-phantomjs": "1.0.x"
+        "mocha-phantomjs": "1.0.x",
+        "shelljs": "0.1.1",
+        "canvas": "0.13.1",
+        "jake": "0.5.8"
     },
     "engines": {
         "node": "0.8.x",
