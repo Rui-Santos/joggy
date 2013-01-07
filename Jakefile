@@ -2,6 +2,9 @@ process.env.DEBUG = ''
 process.env.NODE_ENV = 'testing'
 
 require('shelljs/global')
+var fs = require('fs')
+, path = require('path')
+, _ = require('underscore')
 
 task('test-node', function() {
     var Mocha = require('mocha')
@@ -25,6 +28,36 @@ task('test-browser', function() {
     jake.exec('mocha-phantomjs http://localhost:9572', function() {
         server.close()
     })
+})
+
+task('sprites', function() {
+    mkdir('-p', 'tmp/cards-smaller')
+
+    // reduce scale
+    var cards = require('./lib/cards')
+    , fns = []
+    , Canvas = require('canvas')
+
+    _.each(cards.deck().concat(0), function(card) {
+        var orig = new Canvas.Image()
+        , name = card === 0 ? 'back' : cards.pretty(card)
+        orig.src = fs.readFileSync('assets/media/cards/' + name + '.png')
+
+        var canvas = new Canvas(orig.width / 2, orig.height / 2)
+        , ctx = canvas.getContext('2d')
+        ctx.drawImage(orig, 0, 0, canvas.width, canvas.height)
+
+        fs.writeFileSync('tmp/cards-smaller/' + name + '.png', canvas.toBuffer())
+
+        fns.push(name + '.png')
+    })
+
+    cd('tmp/cards-smaller')
+
+    var result = exec('imgpk ../../assets/media/cards.png ' + fns.join(' '), { silent: true })
+    if (result.code) return fail()
+
+    fs.writeFileSync(path.join(__dirname, 'assets/card-sprites.json'), result.output, 'utf8')
 })
 
 task('test', ['test-node', 'test-browser'])
