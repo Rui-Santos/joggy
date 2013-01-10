@@ -118,7 +118,7 @@ describe('Blackjack', function() {
 
     describe('bet', function() {
         it('calls user.wager', function(done) {
-            var model = new BlackjackModel({ _id: 'test' })
+            var model = new BlackjackModel({ _id: 'test', rules: { decisionTime: 10000 } })
             , table = new Blackjack(model, { callback: function() { } })
             , wagered
             , p = {
@@ -183,7 +183,7 @@ describe('Blackjack', function() {
         })
 
         it('shuffles', function(done) {
-            var model = new BlackjackModel({ _id: 'test' })
+            var model = new BlackjackModel({ _id: 'test', rules: { decisionTime: 10000 } })
             , table = new Blackjack(model, { callback: function() { } })
             , user = { }
             , box = model.attributes.boxes[0]
@@ -206,7 +206,7 @@ describe('Blackjack', function() {
         })
 
         it('deals to dealer first', function(done) {
-            var model = new BlackjackModel({ _id: 'test' })
+            var model = new BlackjackModel({ _id: 'test', rules: { decisionTime: 10000 } })
             , table = new Blackjack(model, { callback: function() { } })
             , user = { }
             , box = model.attributes.boxes[0]
@@ -230,10 +230,11 @@ describe('Blackjack', function() {
         })
 
         it('deals to boxes in order', function(done) {
-            var model = new BlackjackModel({ _id: 'test' })
+            var model = new BlackjackModel({ _id: 'test', rules: { decisionTime: 10000 } })
             , table = new Blackjack(model, { callback: function() { } })
 
             model.attributes.boxes = [{
+                index: 0,
                 player: {},
                 bet: 1e8
             }, {

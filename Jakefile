@@ -27,6 +27,9 @@ task('test-browser', function() {
 
     jake.exec('mocha-phantomjs http://localhost:9572', function() {
         server.close()
+    }, {
+        printStdout: true,
+        printStderr: true
     })
 })
 

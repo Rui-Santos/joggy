@@ -7,7 +7,7 @@ describe('Card', function() {
                 cards: new Image(),
             }, 1)
 
-            expect(card.getWidth()).to.be(100)
+            expect(card.getWidth()).to.be(110)
         })
     })
 

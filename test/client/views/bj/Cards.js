@@ -10,10 +10,5 @@ describe('Cards', function() {
     })
 
     describe('addCard', function() {
-        it('creates and returns card from value', function() {
-            var cards = Cards({ cards: new Image() })
-            , card = cards.addCard(14)
-            expect(card.nodeType).to.be('Shape')
-        })
     })
 })
