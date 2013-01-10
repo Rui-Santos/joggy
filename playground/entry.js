@@ -35,13 +35,8 @@ function tests() {
         hand.addCard(24)
         hand.addCard(25)
 
-        var hand2 = box.split(0)
-        hand.addCard(26)
-        hand2.addCard(27)
-
-        var hand3 = box.split(0)
-        hand.addCard(26)
-        hand3.addCard(27)
+        var hand2 = box.split(0, [26, 27])
+        var hand3 = box.split(0, [26, 27])
 
         s.draw()
 
@@ -62,13 +57,8 @@ function tests() {
         hand.addCard(24)
         hand.addCard(25)
 
-        var hand2 = box.split(0)
-        hand.addCard(26)
-        hand2.addCard(27)
-
-        var hand3 = box.split(0)
-        hand.addCard(26)
-        hand3.addCard(27)
+        var hand2 = box.split(0, [26, 27])
+        var hand3 = box.split(0, [26, 27])
 
         s.draw()
     })();
@@ -85,9 +75,7 @@ function tests() {
         hand.addCard(24)
         hand.addCard(25)
 
-        var hand2 = box.split(0)
-        hand.addCard(26)
-        hand2.addCard(27)
+        var hand2 = box.split(0, [26, 27])
 
         s.draw()
     })();
@@ -102,7 +90,6 @@ function tests() {
 
         var hand = box.addHand()
         hand.addCard(25)
-        hand.toggleAction('hit', true)
 
         s.draw()
     })();
@@ -119,40 +106,6 @@ function tests() {
         setInterval(function() {
             box.setBet((bet++) % 20)
         }, 500)
-
-        s.draw()
-    })();
-
-    (function() {
-        var s = createTestArea('hand - actions')
-        , hand = Hand(assets)
-        s.layer.add(hand)
-        hand.setY(100)
-        hand.setX(150)
-
-        hand.addCard(2)
-        hand.addCard(3)
-        var values = []
-
-        hand.toggleAction('hit', true)
-        hand.toggleAction('stand', true)
-
-        hand.hit.on('click', function() {
-            var c = Math.floor(Math.random() * 52) + 1
-            hand.addCard(c)
-            values.push(c)
-
-            if (c > 21) {
-                setTimeout(function() {
-                    hand.discard()
-                }, 1500)
-            }
-        })
-
-        hand.stand.on('click', function() {
-            hand.toggleAction('hit', false)
-            hand.toggleAction('stand', false)
-        })
 
         s.draw()
     })();
