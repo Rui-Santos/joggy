@@ -1,14 +1,15 @@
 var outer = $('body')
+, _ = require('underscore')
 , Card = require('../lib/client/views/bj/Card')
 , Box = require('../lib/client/views/bj/Box')
 , Hand = require('../lib/client/views/bj/Hand')
 , Cards = require('../lib/client/views/bj/Cards')
 , ChipStack = require('../lib/client/views/bj/ChipStack')
+, Table = require('../lib/client/views/bj/Table')
 , cu = require('../lib/client/canvas')
 , assets
 
 function createTestArea(n, w, h) {
-    console.log(n)
     var $container = $('<div style="float:left;border:solid 1px black;"><h1>' + n + '</h1>').appendTo('body')
     var $stageContainer = $('<div>').appendTo($container)
     , stage = new Kinetic.Stage({
@@ -25,11 +26,55 @@ function createTestArea(n, w, h) {
 
 function tests() {
     (function() {
+        var s = createTestArea('card - display')
+        , card = new Card(assets, 1)
+        s.layer.add(card.node)
+        s.draw()
+    })();
+
+    (function() {
+        var s = createTestArea('card - discard')
+        , card = new Card(assets, 1, 75)
+        s.layer.add(card.node)
+        card.node.setY(100)
+        card.node.setX(150)
+        card.discard(function() {
+            console.log('discarded')
+        })
+        s.draw()
+    })();
+
+    (function() {
+        var s = createTestArea('cards - layout 0')
+        , cards = new Cards(assets)
+        s.layer.add(cards.node)
+
+        cards.add(1)
+        cards.add(2)
+        cards.add(3)
+
+        s.draw()
+    })();
+
+    (function() {
+        var s = createTestArea('cards - layout 1')
+        , cards = new Cards(assets, 1)
+        s.layer.add(cards.node)
+        cards.node.setY(100)
+
+        cards.add(1)
+        cards.add(2)
+        cards.add(3)
+
+        s.draw()
+    })();
+
+    (function() {
         var s = createTestArea('chipstack - counter')
         , stack = new ChipStack()
-        stack.shape.setY(100)
+        stack.node.setY(100)
         stack.chips = 1
-        s.layer.add(stack.shape)
+        s.layer.add(stack.node)
 
         var interval = setInterval(function() {
             stack.chips += stack.chips
@@ -40,19 +85,46 @@ function tests() {
     })();
 
     (function() {
+        var s = createTestArea('hand - add three')
+        , hand = new Hand(assets)
+        s.layer.add(hand.node)
+        hand.node.setY(100)
+
+        hand.add(1)
+        hand.add(2)
+        hand.add(3)
+
+        s.draw()
+    })();
+
+    (function() {
+        var s = createTestArea('box - bet')
+        , box = new Box(assets)
+        s.layer.add(box.node)
+        box.node.setY(220)
+        box.node.setX(150)
+
+        var bet = 0
+
+        setInterval(function() {
+            box.bet.chips = ((bet++) % 20)
+        }, 500)
+
+        s.draw()
+    })();
+
+
+    (function() {
         var s = createTestArea('box - split discard')
-        , box = Box(assets)
-        s.layer.add(box)
-        box.setY(100)
-        box.setX(150)
-        box.setBet(25)
+        , box = new Box(assets)
+        s.layer.add(box.node)
+        box.node.setY(220)
+        box.node.setX(150)
+        box.bet.chips = 25
 
-        var hand = box.addHand()
-        hand.addCard(24)
-        hand.addCard(25)
-
-        var hand2 = box.split(0, [26, 27])
-        var hand3 = box.split(0, [26, 27])
+        var hand = box.deal([24, 25])
+        , hand2 = box.split(0, [26, 27])
+        , hand3 = box.split(0, [26, 27])
 
         s.draw()
 
@@ -63,15 +135,13 @@ function tests() {
 
     (function() {
         var s = createTestArea('box - splits')
-        , box = Box(assets)
-        s.layer.add(box)
-        box.setY(100)
-        box.setX(150)
-        box.setBet(25)
+        , box = new Box(assets)
+        s.layer.add(box.node)
+        box.node.setY(220)
+        box.node.setX(150)
+        box.bet.chips = 25
 
-        var hand = box.addHand()
-        hand.addCard(24)
-        hand.addCard(25)
+        box.deal([24, 25])
 
         var hand2 = box.split(0, [26, 27])
         var hand3 = box.split(0, [26, 27])
@@ -81,15 +151,13 @@ function tests() {
 
     (function() {
         var s = createTestArea('box - split')
-        , box = Box(assets)
-        s.layer.add(box)
-        box.setY(100)
-        box.setX(150)
-        box.setBet(25)
+        , box = new Box(assets)
+        s.layer.add(box.node)
+        box.node.setY(220)
+        box.node.setX(150)
+        box.bet.chips = 25
 
-        var hand = box.addHand()
-        hand.addCard(24)
-        hand.addCard(25)
+        box.deal([24, 25])
 
         var hand2 = box.split(0, [26, 27])
 
@@ -97,45 +165,28 @@ function tests() {
     })();
 
     (function() {
-        var s = createTestArea('box - hand')
-        , box = Box(assets)
-        s.layer.add(box)
-        box.setY(100)
-        box.setX(150)
-        box.setBet(25)
+        var s = createTestArea('box - deal')
+        , box = new Box(assets)
+        s.layer.add(box.node)
+        box.node.setY(200)
+        box.node.setX(150)
+        box.bet.chips = 25
 
-        var hand = box.addHand()
-        hand.addCard(25)
-
-        s.draw()
-    })();
-
-    (function() {
-        var s = createTestArea('box - bet')
-        , box = Box(assets)
-        s.layer.add(box)
-        box.setY(100)
-        box.setX(150)
-
-        var bet = 0
-
-        setInterval(function() {
-            box.setBet((bet++) % 20)
-        }, 500)
+        box.deal([40, 35])
 
         s.draw()
     })();
 
     (function() {
         var s = createTestArea('hand - discard')
-        , hand = Hand(assets)
-        s.layer.add(hand)
-        hand.setY(100)
-        hand.setX(150)
+        , hand = new Hand(assets)
+        s.layer.add(hand.node)
+        hand.node.setY(100)
+        hand.node.setX(150)
 
-        hand.addCard(1)
-        hand.addCard(2)
-        hand.addCard(3)
+        hand.add(1)
+        hand.add(2)
+        hand.add(3)
 
         hand.discard(function() {
             console.log('hand discarded')
@@ -144,62 +195,30 @@ function tests() {
         s.draw()
     })();
 
-    (function() {
-        var s = createTestArea('card - display')
-        , card = Card(assets, 1)
-        s.layer.add(card)
-        s.draw()
-    })();
+    var tableState = {
+        rules: {
+            boxes: 5
+        },
+        state: 'betting',
+        boxes: [{
+            player: 'Henry',
+            bet: 25
+        }, {
+        }, {
+        }, {
+        }, {
+        }]
+    };
 
     (function() {
-        var s = createTestArea('card - discard')
-        , card = Card(assets, 1, 75)
-        s.layer.add(card)
-        card.setY(100)
-        card.setX(150)
-        card.discard(function() {
-            console.log('discarded')
-        })
-        s.draw()
+        var n = 'table - pre-deal'
+        , $container = $('<div style="float:left;border:solid 1px black;"><h1>' + n + '</h1>').appendTo('body')
+        , $stageContainer = $('<div>').appendTo($container)
+        , state = _.clone(tableState)
+        , table = new Table(assets, $stageContainer[0], state)
     })();
 
-    (function() {
-        var s = createTestArea('cards - layout 0')
-        , cards = Cards(assets)
-        s.layer.add(cards)
-
-        cards.addCard(1)
-        cards.addCard(2)
-        cards.addCard(3)
-
-        s.draw()
-    })();
-
-    (function() {
-        var s = createTestArea('cards - layout 1')
-        , cards = Cards(assets, 1)
-        s.layer.add(cards)
-        cards.setY(100)
-
-        cards.addCard(1)
-        cards.addCard(2)
-        cards.addCard(3)
-
-        s.draw()
-    })();
-
-    (function() {
-        var s = createTestArea('hand - add three')
-        , hand = Hand(assets)
-        s.layer.add(hand)
-        hand.setY(100)
-
-        hand.addCard(1)
-        hand.addCard(2)
-        hand.addCard(3)
-
-        s.draw()
-    })();
+    $(window).scrollTop($(window).height());
 }
 
 cu.loadAssets({
