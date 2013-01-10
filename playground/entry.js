@@ -3,6 +3,7 @@ var outer = $('body')
 , Box = require('../lib/client/views/bj/Box')
 , Hand = require('../lib/client/views/bj/Hand')
 , Cards = require('../lib/client/views/bj/Cards')
+, ChipStack = require('../lib/client/views/bj/ChipStack')
 , cu = require('../lib/client/canvas')
 , assets
 
@@ -23,6 +24,21 @@ function createTestArea(n, w, h) {
 }
 
 function tests() {
+    (function() {
+        var s = createTestArea('chipstack - counter')
+        , stack = new ChipStack()
+        stack.shape.setY(100)
+        stack.chips = 1
+        s.layer.add(stack.shape)
+
+        var interval = setInterval(function() {
+            stack.chips += stack.chips
+            s.layer.draw()
+
+            if (stack.chips > 5000) clearInterval(interval)
+        }, 500)
+    })();
+
     (function() {
         var s = createTestArea('box - split discard')
         , box = Box(assets)
