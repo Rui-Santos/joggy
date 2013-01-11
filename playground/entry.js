@@ -6,6 +6,8 @@ var outer = $('body')
 , Cards = require('../lib/client/views/bj/Cards')
 , ChipStack = require('../lib/client/views/bj/ChipStack')
 , Table = require('../lib/client/views/bj/Table')
+, bj = require('../lib/bj')
+, async = require('async')
 , cu = require('../lib/client/canvas')
 , assets
 
@@ -25,6 +27,62 @@ function createTestArea(n, w, h) {
 }
 
 function tests() {
+    (function() {
+        var n = 'table - very full'
+        , $container = $('<div style="float:left;border:solid 1px black;"><h1>' + n + '</h1>').appendTo('body')
+        , $stageContainer = $('<div>').appendTo($container)
+        , table = new Table(assets, $stageContainer[0])
+
+        var i = 1, card = function() {
+            return (i++ - 1) % 52 + 1
+        }
+
+        async.series([
+            function(next) {
+                table.deal({
+                    dealer: [card()],
+                    boxes: [{
+                        index: 0,
+                        cards: [card(), card()]
+                    }, {
+                        index: 1,
+                        cards: [card(), card()]
+                    }, {
+                        index: 2,
+                        cards: [card(), card()]
+                    }, {
+                        index: 3,
+                        cards: [card(), card()]
+                    }, {
+                        index: 4,
+                        cards: [card(), card()]
+                    }]
+                }, next)
+            },
+            function(next) {
+                _.each(table.boxes, function(box) {
+                    box.split(0, [card(), card()])
+                    box.split(0, [card(), card()])
+                    box.hands[0].add(card())
+                    box.hands[0].add(card())
+                    box.hands[0].add(card())
+
+                    box.hands[1].add(card())
+                    box.hands[1].add(card())
+                    box.hands[1].add(card())
+
+                    box.hands[2].add(card())
+                    box.hands[2].add(card())
+                    box.hands[2].add(card())
+                })
+
+                next()
+            }
+        ])
+
+        table.layer.draw()
+    })();
+
     (function() {
         var s = createTestArea('card - display')
         , card = new Card(assets, 1)
@@ -141,9 +199,9 @@ function tests() {
         box.node.setX(150)
         box.bet.chips = 25
 
-        box.deal([24, 25])
+        box.deal([1, 1])
 
-        var hand2 = box.split(0, [26, 27])
+        var hand2 = box.split(0, [9, 8])
         var hand3 = box.split(0, [26, 27])
 
         s.draw()
@@ -195,30 +253,12 @@ function tests() {
         s.draw()
     })();
 
-    var tableState = {
-        rules: {
-            boxes: 5
-        },
-        state: 'betting',
-        boxes: [{
-            player: 'Henry',
-            bet: 25
-        }, {
-        }, {
-        }, {
-        }, {
-        }]
-    };
-
     (function() {
         var n = 'table - pre-deal'
         , $container = $('<div style="float:left;border:solid 1px black;"><h1>' + n + '</h1>').appendTo('body')
         , $stageContainer = $('<div>').appendTo($container)
-        , state = _.clone(tableState)
-        , table = new Table(assets, $stageContainer[0], state)
+        , table = new Table(assets, $stageContainer[0])
     })();
-
-    $(window).scrollTop($(window).height());
 }
 
 cu.loadAssets({
