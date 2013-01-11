@@ -19,6 +19,19 @@ task('test-node', function() {
     runner.on('fail', fail)
 })
 
+task('install', function() {
+    jake.exec([
+        'sudo apt-get install -y python-software-properties',
+        'sudo add-apt-repository -y ppa:chris-lea/node.js',
+        'sudo apt-get update -y',
+        'sudo apt-get install -y nodejs npm g++ libssl-dev libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential',
+        'sudo apt-get upgrade -y',
+    ], {
+        printStdout: true,
+        printStderr: true
+    })
+})
+
 task('test-browser', function() {
     var http = require('http')
     , app = require('./support/phantom-app.js')()
