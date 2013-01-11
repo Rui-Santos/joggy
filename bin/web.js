@@ -1,7 +1,9 @@
 var monk = require('monk')
+, https = require('https')
 , debug = require('debug')('joggy:web')
 , services = require('../lib/server/services')
 , Site = require('../lib/server/controllers/Site')
+, ssl = require('../lib/server/ssl')
 
 process.env.DEBUG || (process.env.DEBUG = '.*');
 
@@ -15,26 +17,18 @@ services.config = require('../config')
 services.db = monk(services.config.db)
 services.sync = require('../lib/server/app.db.sync')
 
-if (services.config.BTC) {
+if (config.BTC) {
     services.bitcoin = new (require('../lib/server/controllers/Bitcoin'))()
 }
 
 services.site = new Site()
 
 var webapp = require('../lib/server/webapp')()
-, listener
-
-if (services.config.ssl) {
-    var ssl = require('../lib/server/ssl')
-    listener = require('https').createServer({
-        key: ssl.key,
-        cert: ssl.cert
-    }, webapp)
-} else {
-    listener = require('http').createServer(webapp)
-}
-
-var socketapp = require('../lib/server/socketapp')(listener)
+, listener = https.createServer({
+    key: ssl.key,
+    cert: ssl.cert
+}, webapp)
+, socketapp = require('../lib/server/socketapp')(listener)
 
 socketapp.on('connection', services.site.connectClient.bind(services.site))
 
