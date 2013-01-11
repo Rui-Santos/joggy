@@ -15,7 +15,7 @@ services.config = require('../config')
 services.db = monk(services.config.db)
 services.sync = require('../lib/server/app.db.sync')
 
-if (config.BTC) {
+if (services.config.BTC) {
     services.bitcoin = new (require('../lib/server/controllers/Bitcoin'))()
 }
 
