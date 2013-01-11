@@ -25,7 +25,7 @@ services.site = new Site()
 var webapp = require('../lib/server/webapp')()
 , listener
 
-if (config.ssl) {
+if (services.config.ssl) {
     var ssl = require('../lib/server/ssl')
     listener = require('https').createServer({
         key: ssl.key,
