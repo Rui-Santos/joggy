@@ -18,13 +18,13 @@ describe('Blackjack', function() {
     })
 
     describe('eject', function() {
-        it('clears player', function() {
+        it('clears user', function() {
             var model = new BlackjackModel({ _id: 'test' })
             , table = new Blackjack(model, { callback: function() { } })
-            model.get('boxes')[0].player = {}
+            model.get('boxes')[0].user = {}
 
             table.eject(0)
-            expect(model.get('boxes')[0].player).to.be(null)
+            expect(model.get('boxes')[0].user).to.be(null)
         })
 
         it('throws if box is not occupied', function() {
@@ -49,69 +49,10 @@ describe('Blackjack', function() {
             var model = new BlackjackModel({ _id: 'test' })
             , table = new Blackjack(model, { callback: function() { } })
             model.set({ state: 'not betting' })
-            model.get('boxes')[0].player = {}
+            model.get('boxes')[0].user = {}
 
             expect(function() {
                 table.eject(0)
-            }).to.throwError(/state/)
-        })
-    })
-
-    describe('sit', function() {
-        it('sets player', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-            , p = {
-                model: {
-                    id: '123',
-                    get: function() {
-                        return 'alice'
-                    }
-                }
-            }
-
-            table.sit(0, p)
-
-            expect(model.get('boxes')[0].player).to.be(p)
-        })
-
-        it('throws if box is already occupied', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-
-            model.get('boxes')[0].player = {}
-
-            expect(function() {
-                table.sit(0, {})
-            }).to.throwError(/taken/)
-        })
-
-        it('throws if user is null', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-
-            expect(function() {
-                table.sit(0)
-            }).to.throwError(/user null/)
-        })
-
-        it('throws if box is out of range', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-
-            expect(function() {
-                table.sit(10, {})
-            }).to.throwError(/exist/)
-        })
-
-        it('throws error if not in betting state', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-            model.set({ state: 'not betting' })
-            model.get('boxes')[0].player = {}
-
-            expect(function() {
-                table.sit(1, {})
             }).to.throwError(/state/)
         })
     })
@@ -136,7 +77,7 @@ describe('Blackjack', function() {
                 }
             }
 
-            model.get('boxes')[0].player = p
+            model.get('boxes')[0].user = p
 
             table.bet(0, 5e8, function(err) {
                 table.endBettingTimer && clearTimeout(table.endBettingTimer)
@@ -187,7 +128,7 @@ describe('Blackjack', function() {
             , table = new Blackjack(model, { callback: function() { } })
             , user = { }
             , box = model.attributes.boxes[0]
-            box.player = user
+            box.user = user
             box.bet = 1e8
 
             var cards = require('../../../lib/cards')
@@ -210,7 +151,7 @@ describe('Blackjack', function() {
             , table = new Blackjack(model, { callback: function() { } })
             , user = { }
             , box = model.attributes.boxes[0]
-            box.player = user
+            box.user = user
             box.bet = 1e8
 
             var cards = require('../../../lib/cards')
@@ -235,10 +176,10 @@ describe('Blackjack', function() {
 
             model.attributes.boxes = [{
                 index: 0,
-                player: {},
+                user: {},
                 bet: 1e8
             }, {
-                player: {},
+                user: {},
                 bet: 1e8
             }]
 
@@ -269,7 +210,7 @@ describe('Blackjack', function() {
                 boxes: [{
                     index: 0,
                     bet: 1,
-                    player: {},
+                    user: {},
                     splits: 0,
                     hands: [{
                         index: 0,
@@ -279,7 +220,7 @@ describe('Blackjack', function() {
                 }, {
                     index: 1,
                     bet: 1,
-                    player: {},
+                    user: {},
                     splits: 1,
                     hands: [{
                         index: 0,
@@ -293,7 +234,7 @@ describe('Blackjack', function() {
                 }, {
                     index: 2,
                     bet: 1,
-                    player: {},
+                    user: {},
                     splits: 0,
                     hands: [{
                         index: 0,
