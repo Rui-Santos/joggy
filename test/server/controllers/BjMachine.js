@@ -57,65 +57,6 @@ describe('Blackjack', function() {
         })
     })
 
-    describe('sit', function() {
-        it('sets user', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-            , p = {
-                model: {
-                    id: '123',
-                    get: function() {
-                        return 'alice'
-                    }
-                }
-            }
-
-            table.sit(0, p)
-
-            expect(model.get('boxes')[0].user).to.be(p)
-        })
-
-        it('throws if box is already occupied', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-
-            model.get('boxes')[0].user = {}
-
-            expect(function() {
-                table.sit(0, {})
-            }).to.throwError(/taken/)
-        })
-
-        it('throws if user is null', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-
-            expect(function() {
-                table.sit(0)
-            }).to.throwError(/user null/)
-        })
-
-        it('throws if box is out of range', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-
-            expect(function() {
-                table.sit(10, {})
-            }).to.throwError(/exist/)
-        })
-
-        it('throws error if not in betting state', function() {
-            var model = new BlackjackModel({ _id: 'test' })
-            , table = new Blackjack(model, { callback: function() { } })
-            model.set({ state: 'not betting' })
-            model.get('boxes')[0].user = {}
-
-            expect(function() {
-                table.sit(1, {})
-            }).to.throwError(/state/)
-        })
-    })
-
     describe('bet', function() {
         it('calls user.wager', function(done) {
             var model = new BlackjackModel({ _id: 'test', rules: { decisionTime: 10000 } })
