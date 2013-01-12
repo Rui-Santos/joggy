@@ -53,9 +53,6 @@ function tests() {
                     }, {
                         index: 3,
                         cards: [card(), card()]
-                    }, {
-                        index: 4,
-                        cards: [card(), card()]
                     }]
                 }, next)
             },
