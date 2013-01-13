@@ -3,6 +3,7 @@ var outer = $('body')
 , Card = require('../lib/client/views/bj/Card')
 , Box = require('../lib/client/views/bj/Box')
 , Hand = require('../lib/client/views/bj/Hand')
+, Countdown = require('../lib/client/views/bj/Countdown')
 , Cards = require('../lib/client/views/bj/Cards')
 , ChipStack = require('../lib/client/views/bj/ChipStack')
 , Table = require('../lib/client/views/bj/Table')
@@ -27,6 +28,14 @@ function createTestArea(n, w, h) {
 }
 
 function tests() {
+    (function() {
+        var s = createTestArea('countdown')
+        , cd = new Countdown(10)
+        s.layer.add(cd.node)
+        cd.start()
+        s.draw()
+    })();
+
     (function() {
         var n = 'table - very full'
         , $container = $('<div style="float:left;border:solid 1px black;"><h1>' + n + '</h1>').appendTo('body')
