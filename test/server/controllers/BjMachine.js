@@ -327,4 +327,56 @@ describe('BjMachine', function() {
             })
         })
     })
+
+    describe('dealerNeedsToDraw', function() {
+        it('respects the soft 17 rule (on)', function() {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('ad'), bj.card('4d'), bj.card('2c')],
+                rules: {
+                    hitSoft17: true
+                }
+            })
+
+            expect(table.dealerNeedsToDraw()).to.be(true)
+        })
+
+        it('respects the soft 17 rule (off)', function() {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('ad'), bj.card('4d'), bj.card('2c')],
+                rules: {
+                    hitSoft17: false
+                }
+            })
+
+            expect(table.dealerNeedsToDraw()).to.be(false)
+        })
+
+        it('does not draw if it has 21', function() {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('td'), bj.card('kh'), bj.card('ac')],
+            })
+
+            expect(table.dealerNeedsToDraw()).to.be(false)
+        })
+
+        it('stops on hard 17', function() {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('td'), bj.card('7c')],
+            })
+
+            expect(table.dealerNeedsToDraw()).to.be(false)
+        })
+    })
 })
