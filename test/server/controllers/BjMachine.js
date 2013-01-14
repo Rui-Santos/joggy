@@ -1,8 +1,10 @@
 var expect = require('expect.js')
 , Blackjack = require('../../../lib/server/controllers/BjMachine')
 , BlackjackModel = require('../../../lib/models/BjMachine')
+, bj = require('../../../lib/bj')
+, _ = require('underscore')
 
-describe('Blackjack', function() {
+describe('BjMachine', function() {
     describe('constructor', function() {
         it('callback', function() {
             var model = new BlackjackModel({ _id: 'test' })
@@ -246,6 +248,135 @@ describe('Blackjack', function() {
 
             var actual = table.getNextTurn()
             expect(actual).to.eql([2, 0])
+        })
+    })
+
+    describe('settle', function() {
+        it('calls bj.settle for bj push', function(done) {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('ac'), bj.card('td')],
+                boxes: [{
+                    user: {
+                        give: function(satoshi) {
+                            expect(satoshi).to.be(2e5)
+                            _.last(arguments)()
+                        }
+                    },
+                    splits: 0,
+                    hands: [{
+                        bet: 2e5,
+                        cards: [bj.card('as'), bj.card('kh')]
+                    }]
+                }]
+            })
+
+            var called
+            bj.settle_orig = bj.settle
+            bj.settle = function(splits, hand, dealer, showdown) {
+                called = true
+                expect(splits).to.be(0)
+                expect(hand).to.eql([bj.card('as'), bj.card('kh')])
+                expect(dealer).to.eql([bj.card('ac'), bj.card('td')])
+                return 1
+            }
+
+            table.settle(function(err) {
+                bj.settle = bj.settle_orig
+                expect(called).to.be(true)
+                done()
+            })
+        })
+
+        it('calls bj.settle for lose vs dealer bj', function(done) {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('ac'), bj.card('td')],
+                boxes: [{
+                    user: {
+                        give: function(satoshi) {
+                            throw new Error('player being given ' + satoshi + ' on lose')
+                        }
+                    },
+                    splits: 0,
+                    hands: [{
+                        bet: 2e5,
+                        cards: [bj.card('as'), bj.card('as')]
+                    }]
+                }]
+            })
+
+            var called
+            bj.settle_orig = bj.settle
+            bj.settle = function(splits, hand, dealer, showdown) {
+                called = true
+                expect(splits).to.be(0)
+                expect(hand).to.eql([bj.card('as'), bj.card('as')])
+                expect(dealer).to.eql([bj.card('ac'), bj.card('td')])
+                return 0
+            }
+
+            table.settle(function(err) {
+                bj.settle = bj.settle_orig
+                expect(called).to.be(true)
+                done()
+            })
+        })
+    })
+
+    describe('dealerNeedsToDraw', function() {
+        it('respects the soft 17 rule (on)', function() {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('ad'), bj.card('4d'), bj.card('2c')],
+                rules: {
+                    hitSoft17: true
+                }
+            })
+
+            expect(table.dealerNeedsToDraw()).to.be(true)
+        })
+
+        it('respects the soft 17 rule (off)', function() {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('ad'), bj.card('4d'), bj.card('2c')],
+                rules: {
+                    hitSoft17: false
+                }
+            })
+
+            expect(table.dealerNeedsToDraw()).to.be(false)
+        })
+
+        it('does not draw if it has 21', function() {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('td'), bj.card('kh'), bj.card('ac')],
+            })
+
+            expect(table.dealerNeedsToDraw()).to.be(false)
+        })
+
+        it('stops on hard 17', function() {
+            var model = new BlackjackModel({ _id: 'test' })
+            , table = new Blackjack(model, { callback: function() { } })
+
+            model.set({
+                dealer: [bj.card('td'), bj.card('7c')],
+            })
+
+            expect(table.dealerNeedsToDraw()).to.be(false)
         })
     })
 })
