@@ -45,6 +45,10 @@ describe('User', function() {
                                 })
 
                                 cb(null, 1)
+                            },
+
+                            id: function(x) {
+                                return x
                             }
                         }
                     } else if (name === 'users.log') {
