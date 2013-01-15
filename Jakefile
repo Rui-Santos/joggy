@@ -119,11 +119,20 @@ task('sprites-kitty', function() {
 
 task('sprites', ['sprites-cards', 'sprites-rwb', 'sprites-kitty'])
 
-task('publish', ['sprites', 'test'], function() {
+task('publish-prod', ['sprites', 'test'], function() {
     jake.exec([
         'git checkout prod',
         'git merge master',
         'git checkout master',
         'git push prod prod:master'
+    ])
+})
+
+task('publish-dev', ['sprites', 'test'], function() {
+    jake.exec([
+        'git checkout dev',
+        'git merge master',
+        'git checkout master',
+        'git push dev dev:master'
     ])
 })
