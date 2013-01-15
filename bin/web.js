@@ -13,7 +13,7 @@ process.on('uncaughtException', function(err) {
 })
 
 services.config = require('../config')
-services.db = mongoskin.db(services.config.db)
+services.db = mongoskin.db(services.config.db, { safe: true })
 services.sync = require('../lib/server/app.db.sync')
 
 if (services.config.BTC) {
