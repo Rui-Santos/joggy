@@ -32,7 +32,7 @@ describe('User', function() {
             , services = require('../../../lib/server/services')
 
             services.db = {
-                get: function(name) {
+                collection: function(name) {
                     if (name === 'users') {
                         return {
                             update: function(q, u, cb) {

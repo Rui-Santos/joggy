@@ -1,4 +1,4 @@
-var monk = require('monk')
+var mongoskin = require('mongoskin')
 , https = require('https')
 , debug = require('debug')('joggy:web')
 , services = require('../lib/server/services')
@@ -13,7 +13,7 @@ process.on('uncaughtException', function(err) {
 })
 
 services.config = require('../config')
-services.db = monk(services.config.db)
+services.db = mongoskin.db(services.config.db)
 services.sync = require('../lib/server/app.db.sync')
 
 if (services.config.BTC) {
