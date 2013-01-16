@@ -97,6 +97,14 @@ describe('User', function() {
             expect(user.available()).to.be(0)
 
             model.set({
+                balance: 50e5,
+                wagered: 100e5,
+                requirement: 1000e5
+            })
+
+            expect(user.available()).to.be(0)
+
+            model.set({
                 balance: 11e5,
                 wagered: 0,
                 requirement: 0
