@@ -10,7 +10,7 @@ task('test-node', function() {
     var Mocha = require('mocha')
     , mocha = new Mocha()
     , js = function(f) { return f.match(/\.js$/) }
-    mocha.reporter('spec').ui('tdd')
+    mocha.reporter('dot').ui('tdd')
 
     ls('test/*.js').forEach(mocha.addFile.bind(mocha))
     find('test/server/controllers').filter(js).forEach(mocha.addFile.bind(mocha))
@@ -38,7 +38,7 @@ task('test-browser', function() {
     , server = http.createServer(app)
     server.listen(9572)
 
-    jake.exec('mocha-phantomjs http://localhost:9572', function() {
+    jake.exec('mocha-phantomjs -R dot http://localhost:9572', function() {
         server.close()
     }, {
         printStdout: true,
