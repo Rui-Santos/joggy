@@ -16,6 +16,8 @@ describe('BjMachine', function() {
             })
 
             expect(done).to.be.ok()
+            clearInterval(table.ejectIdleUsersTimer)
+            clearTimeout(table.endBettingTimer)
         })
     })
 
@@ -27,6 +29,8 @@ describe('BjMachine', function() {
 
             table.eject(0)
             expect(model.get('boxes')[0].user).to.be(null)
+
+            clearInterval(table.ejectIdleUsersTimer)
         })
 
         it('throws if box is not occupied', function() {
@@ -36,6 +40,8 @@ describe('BjMachine', function() {
             expect(function() {
                 table.eject(0)
             }).to.throwError(/empty/)
+
+            clearInterval(table.ejectIdleUsersTimer)
         })
 
         it('throws if box is out of range', function() {
@@ -45,6 +51,8 @@ describe('BjMachine', function() {
             expect(function() {
                 table.eject(10)
             }).to.throwError(/exist/)
+
+            clearInterval(table.ejectIdleUsersTimer)
         })
 
         it('throws if not in the betting state', function() {
@@ -56,6 +64,8 @@ describe('BjMachine', function() {
             expect(function() {
                 table.eject(0)
             }).to.throwError(/state/)
+
+            clearInterval(table.ejectIdleUsersTimer)
         })
     })
 
@@ -83,6 +93,7 @@ describe('BjMachine', function() {
 
             table.bet(0, 5e8, function(err) {
                 table.endBettingTimer && clearTimeout(table.endBettingTimer)
+                clearInterval(table.ejectIdleUsersTimer)
                 done(err)
             })
         })
@@ -101,6 +112,7 @@ describe('BjMachine', function() {
             table.deal(function(err) {
                 expect(err).to.be.ok()
                 expect(err.message).to.match(/state/)
+                clearTimeout(table.ejectIdleUsersTimer)
                 done()
             })
         })
@@ -112,6 +124,7 @@ describe('BjMachine', function() {
             table.deal(function(err) {
                 expect(err).to.be.ok()
                 expect(err.message).to.match(/box/)
+                clearTimeout(table.ejectIdleUsersTimer)
                 done()
             })
         })
@@ -123,6 +136,8 @@ describe('BjMachine', function() {
             expect(function() {
                 table.deal(null)
             }).to.throwError(/callback/)
+
+            clearTimeout(table.ejectIdleUsersTimer)
         })
 
         it('shuffles', function(done) {
@@ -144,6 +159,7 @@ describe('BjMachine', function() {
             table.deal(function(err) {
                 table.turnTimer && clearTimeout(table.turnTimer)
                 expect(model.attributes.deck).to.eql(deck)
+                clearTimeout(table.ejectIdleUsersTimer)
                 done(err)
             })
         })
@@ -168,6 +184,7 @@ describe('BjMachine', function() {
                 table.turnTimer && clearTimeout(table.turnTimer)
                 expect(model.attributes.dealer).to.eql([1, 2])
                 cards.shuffle = orig
+                clearTimeout(table.ejectIdleUsersTimer)
                 done(err)
             })
         })
@@ -198,6 +215,7 @@ describe('BjMachine', function() {
                 expect(model.attributes.boxes[0].hands[0].cards).to.eql([3, 4])
                 expect(model.attributes.boxes[1].hands[0].cards).to.eql([5, 6])
                 cards.shuffle = orig
+                clearTimeout(table.ejectIdleUsersTimer)
                 done(err)
             })
         })
@@ -248,6 +266,8 @@ describe('BjMachine', function() {
 
             var actual = table.getNextTurn()
             expect(actual).to.eql([2, 0])
+
+            clearTimeout(table.ejectIdleUsersTimer)
         })
     })
 
@@ -286,6 +306,7 @@ describe('BjMachine', function() {
             table.settle(function(err) {
                 bj.settle = bj.settle_orig
                 expect(called).to.be(true)
+                clearTimeout(table.ejectIdleUsersTimer)
                 done()
             })
         })
@@ -323,6 +344,7 @@ describe('BjMachine', function() {
             table.settle(function(err) {
                 bj.settle = bj.settle_orig
                 expect(called).to.be(true)
+                clearTimeout(table.ejectIdleUsersTimer)
                 done()
             })
         })
@@ -341,6 +363,7 @@ describe('BjMachine', function() {
             })
 
             expect(table.dealerNeedsToDraw()).to.be(true)
+            clearTimeout(table.ejectIdleUsersTimer)
         })
 
         it('respects the soft 17 rule (off)', function() {
@@ -355,6 +378,7 @@ describe('BjMachine', function() {
             })
 
             expect(table.dealerNeedsToDraw()).to.be(false)
+            clearTimeout(table.ejectIdleUsersTimer)
         })
 
         it('does not draw if it has 21', function() {
@@ -366,6 +390,7 @@ describe('BjMachine', function() {
             })
 
             expect(table.dealerNeedsToDraw()).to.be(false)
+            clearTimeout(table.ejectIdleUsersTimer)
         })
 
         it('stops on hard 17', function() {
@@ -377,6 +402,7 @@ describe('BjMachine', function() {
             })
 
             expect(table.dealerNeedsToDraw()).to.be(false)
+            clearTimeout(table.ejectIdleUsersTimer)
         })
     })
 })
