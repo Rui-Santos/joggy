@@ -4,6 +4,10 @@
     position: relative;
 
     .table {
+        .card img {
+            max-width: none;
+        }
+
         .spot {
             position: absolute;
 
@@ -13,13 +17,28 @@
             }
 
             &.spot-2 {
-                top: 300px;
+                top: 350px;
                 left: 50px;
             }
 
             &.spot-3 {
-                top: 300px;
+                top: 350px;
                 left: 700px;
+            }
+
+            .unset-cards {
+                clear: both;
+                padding-top: 10px;
+            }
+
+            .unset-cards .card {
+                margin: 6px;
+                float: left;
+            }
+
+            .unset-cards .card.selected {
+                margin: 4px;
+                border: solid 2px red;
             }
         }
     }
